@@ -1,0 +1,14 @@
+
+Options +FollowSymlinks
+
+
+<IfModule mod_rewrite.c>
+
+  RewriteEngine on
+  RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)?$ LOLindex.php?LOLquery=$1 [L]
+  RewriteRule ^[^.]?$ LOLindex.php
+  
+</IfModule>
+
