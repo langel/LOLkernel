@@ -5,6 +5,12 @@ define('HOME_DIR', $_SERVER['DOCUMENT_ROOT'].'/');
 
 require('kernel/head.php');
 
-echo LOL::page($_GET['LOLquery']);
+LOL::bootup();
+
+require('boot.php');
+
+$page = LOL::page($_GET['LOLquery']);
+
+require('done.php');
 
 ?>
