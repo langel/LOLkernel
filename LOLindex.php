@@ -1,6 +1,7 @@
 <?php
 
-define('HOME_URL', 'http://'.$_SERVER['SERVER_NAME'].'/');     ## DEFINE LOCAL PATHS
+# define local paths
+define('HOME_URL', 'http://'.$_SERVER['SERVER_NAME'].'/');
 define('HOME_DIR', $_SERVER['DOCUMENT_ROOT'].'/');
 
 require('kernel/head.php');
