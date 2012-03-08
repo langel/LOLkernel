@@ -1,18 +1,7 @@
 <?php
 
-class LOL	{
+require('kernel/ramstack.php');
 
-	function page($cmd)	{
-		if ($cmd=='')	{
-			$cmd = 'index';
-		}
-		return $cmd;
-	}
-
-	function bootup()	{
-		
-	}
-
-}
+require('kernel/interface.php');
 
 ?>

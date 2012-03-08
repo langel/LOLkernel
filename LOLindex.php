@@ -6,11 +6,11 @@ define('HOME_DIR', $_SERVER['DOCUMENT_ROOT'].'/');
 
 require('kernel/head.php');
 
-LOL::bootup();
+//LOL::bootup();
 
 require('boot.php');
 
-$page = LOL::page($_GET['LOLquery']);
+$page = LOL::Render($_GET['LOLquery']);
 
 require('done.php');
 
