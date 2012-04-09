@@ -1,21 +1,6 @@
 <?php
 
 
-function peek($addr)	{
-	$addr = str_replace('|',"'][]'",$addr);
-	return LOL_INTERFACE_RAMSTACK::PEEK("['".$addr."']");
-}
-
-function poke($addr,$a)	{
-	$addr = str_replace('|',"']['",$addr);
-	if (strstr($addr,'[]'))	{
-		$addr = str_replace('[]','',$addr);
-		return LOL_INTERFACE_RAMSTACK::POKE("['".$addr."'][]",$val);
-	}
-	return LOL_INTERFACE_RAMSTACK::POKE("['".$addr."']",$a);
-}
-
-
 class LOL_INTERFACE_RAMSTACK	{
 
 	function __construct()	{
@@ -33,33 +18,42 @@ class LOL_INTERFACE_RAMSTACK	{
 
 	function PEEK($addr)	{
 		$stack = LOL_INTERFACE_RAMSTACK::HANDSHAKE();
-		eval('$a = $stack->rem'.$addr.';');
-		return $a;
+		$addr = str_replace('|',"']['",$addr);
+		eval('$val = $stack->rem'."['".$addr."']".';');
+		return $val;
 	}
 
-	function POKE($addr, $a)	{
+	function POKE($addr, $val)	{
 		$stack = LOL_INTERFACE_RAMSTACK::HANDSHAKE();
-		$a = str_replace("'","\\",$a);
-		eval('$stack->ram'.$add.' = \''.$a.'\';');
+		$addr = str_replace('|',"']['",$addr);
+		if (strstr($addr,'[]'))	{
+			$addr = str_replace('[]','',$addr);
+			$addr = "['".$addr."'][]";
+		}
+		else	{
+			$addr = "['".$addr."']";
+		}
+		$val = str_replace("'","\'",$val);
+		eval('$stack->ram'.$addr.' = \''.$val.'\';');
 	}
 
-	function PUSH($a)	{
+	function PUSH($val)	{
 		LOL_INTERFACE_RAMSTACK::INC('STACK_COUNTER');
-		poke('RAMSTACK|'.peek('STACK_COUNTER'),$a);
+		LOL_INTERFACE_RAMSTACK::POKE('RAMSTACK|'.LOL_INTERFACE_RAMSTACK::PEEK('STACK_COUNTER'),$val);
 	}			
 
 	function POP()	{	
-		$a = peek('RAMSTACK|'.peek('STACK_COUNTER'));
+		$val = LOL_INTERFACE_RAMSTACK::PEEK('RAMSTACK|'.LOL_INTERFACE_RAMSTACK::PEEK('STACK_COUNTER'));
 		LOL_INTERFACE_RAMSTACK::DEC('STACK_COUNTER');
-		return $a;
+		return $val;
 	}
 
 	function INC($addr)	{
-		return poke($addr,peek($addr)+1);
+		return LOL_INTERFACE_RAMSTACK::POKE($addr,LOL_INTERFACE_RAMSTACK::PEEK($addr)+1);
 	}
 
 	function DEC($addr)	{
-		return poke($addr,peek($addr)-1);
+		return LOL_INTERFACE_RAMSTACK::POKE($addr,LOL_INTERFACE_RAMSTACK::PEEK($addr)-1);
 	}
 
 }

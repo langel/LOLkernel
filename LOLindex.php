@@ -10,7 +10,7 @@ require('kernel/head.php');
 
 require('boot.php');
 
-$page = LOL::Render($_GET['LOLquery']);
+echo LOL::Render($_GET['LOLquery']);
 
 require('done.php');
 
