@@ -56,6 +56,13 @@ class LOL_INTERFACE_RAMSTACK	{
 		return LOL_INTERFACE_RAMSTACK::POKE($addr,LOL_INTERFACE_RAMSTACK::PEEK($addr)-1);
 	}
 
+	function ExtraGlobalSet(&$var) {
+		return LOL_INTERFACE_RAMSTACK::POKE('extra_globals[]',$var);
+	}
+
+	function &ExtraGlobalsGet() {
+		return LOL_INTERFACE_RAMSTACK::PEEK('extra_globals');
+	}
 }
 
 ?>
