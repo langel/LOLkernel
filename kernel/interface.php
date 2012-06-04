@@ -27,8 +27,8 @@ class LOL	{
 
 		$control_file = $WUT.'/'.$WUT.'.php';
 
-		if (is_file('app/'.$control_file)) {
-			include('app/'.$control_file);
+		if (is_file('wuts/'.$control_file)) {
+			include('wuts/'.$control_file);
 		}
 		else if (is_file('kernel/wuts/'.$control_file)) {
 			include('kernel/wuts/'.$control_file);
@@ -40,8 +40,8 @@ class LOL	{
 		}
 
 		$template = $WUT.'/'.$WUT.$ACT.'.php';
-		if (is_file('app/'.$template)) {
-			$template_file = 'app/'.$template;
+		if (is_file('wuts/'.$template)) {
+			$template_file = 'wuts/'.$template;
 		}
 		else if (is_file('kernel/wuts/'.$template)) {
 			$template_file = 'kernel/wuts/'.$template;
@@ -49,7 +49,7 @@ class LOL	{
 		if (!$template_file) {
 			// XXX want this to have an error type too
 			// this would be a minor rendering or template control issue
-			throw new Exception('Unfound template file -- '.$template_file);
+			throw new Exception('Unfound template file -- '.$template);
 			return false;
 		}
 		

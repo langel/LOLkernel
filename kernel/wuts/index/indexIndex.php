@@ -1,7 +1,15 @@
 <h1>LOLkernel can has render page.</h1>
 
+<p>
+... scanning all wuts ...
+</p>
+
 <h2>app wuts</h2>
-<; print_r($app_wuts) ?>
+<p>
+<: $app_links ?>
+</p>
 
 <h2>kernel wuts</h2>
-<; print_r($kernel_wuts) ?>
+<p>
+<: $kernel_links ?>
+</p>
