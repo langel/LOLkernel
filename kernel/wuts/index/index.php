@@ -18,14 +18,14 @@ if ($ACT=='Index') {
 	$kernel_wuts = array();
 	foreach (glob('kernel/wuts/*') as $wut) {
 		if (is_dir($wut)) {
-			$kernel_wuts[] = substr($wut,strrpos($wut,'/'));
+			$kernel_wuts[] = substr($wut,strrpos($wut,'/')+1);
 		}
 	}
 	if (!count($kernel_wuts)) {
 		$kernel_links = 'None found.';
 	}
 	else foreach ($kernel_wuts as $wut) {
-		$kernel_links .= '<a href="/LOLkernel'.$wut.'">'.$wut.'</a>'.BR;
+		$kernel_links .= '<a class="button" href="/LOLkernel/'.$wut.'">'.$wut.'</a>';
 	}
 
 }

@@ -1,4 +1,4 @@
-<h1>LOLkernel can has render page.</h1>
+<h1>LOLkernel can has render page</h1>
 
 <p>
 ... scanning all wuts ...
