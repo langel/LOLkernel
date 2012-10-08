@@ -27,8 +27,8 @@ class LOL	{
 
 		$control_file = $WUT.'/'.$WUT.'.php';
 
-		if (is_file('wuts/'.$control_file)) {
-			include('wuts/'.$control_file);
+		if (is_file('app/'.$control_file)) {
+			include('app/'.$control_file);
 		}
 		else if (is_file('kernel/wuts/'.$control_file)) {
 			include('kernel/wuts/'.$control_file);
@@ -40,8 +40,8 @@ class LOL	{
 		}
 
 		$template = $WUT.'/'.$WUT.$ACT.'.php';
-		if (is_file('wuts/'.$template)) {
-			$template_file = 'wuts/'.$template;
+		if (is_file('app/'.$template)) {
+			$template_file = 'app/'.$template;
 		}
 		else if (is_file('kernel/wuts/'.$template)) {
 			$template_file = 'kernel/wuts/'.$template;
@@ -65,6 +65,11 @@ class LOL	{
 		return $render;
 
 	}
+
+	function HeaderSet($template) { return LOL_INTERFACE_HTMLJUNK::HeaderSet($template); }
+	function HeaderGet() { return LOL_INTERFACE_HTMLJUNK::HeaderGet(); }
+	function FooterSet($template) { return LOL_INTERFACE_HTMLJUNK::FooterSet($template); }
+	function FooterGet() { return LOL_INTERFACE_HTMLJUNK::FooterGet(); }
 
 }
 

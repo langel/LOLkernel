@@ -32,6 +32,22 @@ class LOL_INTERFACE_HTMLJUNK {
 		}
 	}
 
+	function HeaderSet($template) {
+		POKE('HTMLJUNK|header', LOL::Render($template));
+	}
+
+	function HeaderGet() {
+		return PEEK('HTMLJUNK|header');
+	}
+
+	function FooterSet($template) {
+		POKE('HTMLJUNK|header', LOL::Render($template));
+	}
+
+	function FooterGet() {
+		return PEEK('HTMLJUNK|footer');
+	}
+
 }
 
 

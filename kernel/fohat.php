@@ -24,8 +24,8 @@ class FOHAT {
 		if (is_file('app/'.$model_file)) {
 			require_once('app/'.$model_file);
 		}
-		elseif (is_file('kernel/wuts/'.$model_file)) {
-			require_once('kernel/wuts/'.$model_file);
+		elseif (is_file('kernel/app'.$model_file)) {
+			require_once('kernel/app'.$model_file);
 		}
 		else {
 		// XXX	should we check if there is an existing table first?
