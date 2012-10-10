@@ -16,8 +16,12 @@
  *		view github wiki for more info
  */
 
+
+# define helpful things
+define('HOME_URL', 'http://'.$_SERVER['SERVER_NAME'].'/');
+define('HOME_DIR', $_SERVER['DOCUMENT_ROOT'].'/');
+define('CR', "\r\n");
 define('BR',"<br>\r\n");
-define('CR',"\r\n");
 
 function PEEK($addr) {
 	return LOL_INTERFACE_RAMSTACK::PEEK($addr);

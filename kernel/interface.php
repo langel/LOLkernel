@@ -2,15 +2,23 @@
 
 class LOL	{
 
+
 	function ParseCommand($cmd)	{
 		//poke('comand_calls[]',$cmd);
 		return explode('/',$cmd);
 	}
 
+
 	function Render($cmd)	{
-		
+
+		$recursion_depth = LOL::INC('RenderRecursionDepth');
+		if ($recursion_depth>42) {
+			throw new Exception('Render recursion depth limit of 42 exceeded. ');
+			return false;
+		}
+
 		$extra_globals = LOL_INTERFACE_RAMSTACK::ExtraGlobalsGet();
-		foreach ($extra_globals as $g) {
+		if ($extra_globals) foreach ($extra_globals as $g) {
 			eval('global '.$g.';');
 		}
 
@@ -26,12 +34,11 @@ class LOL	{
 		$VAR3 = $a[4];
 
 		$control_file = $WUT.'/'.$WUT.'.php';
-
 		if (is_file('app/'.$control_file)) {
 			include('app/'.$control_file);
 		}
-		else if (is_file('kernel/wuts/'.$control_file)) {
-			include('kernel/wuts/'.$control_file);
+		else if (is_file('kernel/app/'.$control_file)) {
+			include('kernel/app/'.$control_file);
 		}
 		else {
 			// XXX want this to have an error type too
@@ -43,8 +50,8 @@ class LOL	{
 		if (is_file('app/'.$template)) {
 			$template_file = 'app/'.$template;
 		}
-		else if (is_file('kernel/wuts/'.$template)) {
-			$template_file = 'kernel/wuts/'.$template;
+		else if (is_file('kernel/app/'.$template)) {
+			$template_file = 'kernel/app/'.$template;
 		}
 		if (!$template_file) {
 			// XXX want this to have an error type too
@@ -62,6 +69,9 @@ class LOL	{
 		eval(' ?>'.$str.'<?php ');
 		$render = ob_get_contents();
 		ob_end_clean();
+
+		//LOL::DEC('RenderRecursionDepth');
+
 		return $render;
 
 	}
@@ -70,6 +80,14 @@ class LOL	{
 	function HeaderGet() { return LOL_INTERFACE_HTMLJUNK::HeaderGet(); }
 	function FooterSet($template) { return LOL_INTERFACE_HTMLJUNK::FooterSet($template); }
 	function FooterGet() { return LOL_INTERFACE_HTMLJUNK::FooterGet(); }
+
+
+	#	RAMSTACK
+
+	function PEEK($addr) { return LOL_INTERFACE_RAMSTACK::PEEK($addr); }
+	function POKE($addr, $val) { return LOL_INTERFACE_RAMSTACK::POKE($addr, $val); }
+	function INC($addr) { return LOL_INTERFACE_RAMSTACK::INC($addr); }
+	function DEC($addr) { return LOL_INTERFACE_RAMSTACK::DEC($addr); }
 
 }
 

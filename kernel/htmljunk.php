@@ -33,19 +33,27 @@ class LOL_INTERFACE_HTMLJUNK {
 	}
 
 	function HeaderSet($template) {
-		POKE('HTMLJUNK|header', LOL::Render($template));
+		POKE('HTMLJUNK|template_header', $template);
 	}
 
 	function HeaderGet() {
-		return PEEK('HTMLJUNK|header');
+		$template = PEEK('HTMLJUNK|template_header');
+		if ($template!='') {
+			return LOL::Render(PEEK('HTMLJUNK|template_header'));
+		}
+		else return '';
 	}
 
 	function FooterSet($template) {
-		POKE('HTMLJUNK|header', LOL::Render($template));
+		POKE('HTMLJUNK|template_footer', $template);
 	}
 
 	function FooterGet() {
-		return PEEK('HTMLJUNK|footer');
+		$template = PEEK('HTMLJUNK|template_footer');
+		if ($template!='') {
+			return LOL::Render(PEEK('HTMLJUNK|template_footer'));
+		}
+		else return '';
 	}
 
 }

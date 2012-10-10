@@ -10,7 +10,7 @@ class LOL_INTERFACE_RAMSTACK	{
 	function &HANDSHAKE()	{
 		static $self;
 		if (!is_object($self))	{
-			$self = new LOL_INTERFACE_STACK();
+			$self = new LOL_INTERFACE_RAMSTACK();
 			$self->ram['STACK_COUNTER'] = 0;
 		}
 		return $self;
@@ -19,7 +19,7 @@ class LOL_INTERFACE_RAMSTACK	{
 	function PEEK($addr)	{
 		$stack = LOL_INTERFACE_RAMSTACK::HANDSHAKE();
 		$addr = str_replace('|',"']['",$addr);
-		eval('$val = $stack->rem'."['".$addr."']".';');
+		eval('$val = $stack->ram'."['".$addr."']".';');
 		return $val;
 	}
 
@@ -33,8 +33,12 @@ class LOL_INTERFACE_RAMSTACK	{
 		else	{
 			$addr = "['".$addr."']";
 		}
-		$val = str_replace("'","\'",$val);
+		$val_original = $val;
+		if (is_string($val)) {
+			$val = str_replace("'","\'",$val);
+		}
 		eval('$stack->ram'.$addr.' = \''.$val.'\';');
+		return $val_original;
 	}
 
 	function PUSH($val)	{
@@ -49,6 +53,8 @@ class LOL_INTERFACE_RAMSTACK	{
 	}
 
 	function INC($addr)	{
+		$val = LOL_INTERFACE_RAMSTACK::PEEK($addr)+1;
+		//echo $val;
 		return LOL_INTERFACE_RAMSTACK::POKE($addr,LOL_INTERFACE_RAMSTACK::PEEK($addr)+1);
 	}
 

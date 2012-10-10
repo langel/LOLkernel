@@ -27,12 +27,13 @@ function LOLKERNEL_ERROR_HAND($error_number,$string,$file,$line) {
 		break;
 	default:
 		PageAppend('UNDEFINED FAULT :: '.$string.BR);
+		echo '<pre>'.GetBackTrace().'</pre>';
 		break;
 	}
 	return true;
 }
 
-set_error_handler('LOLKERNEL_ERROR_HAND');
+set_error_handler('LOLKERNEL_ERROR_HAND', E_ALL ^ E_NOTICE);
 
 function ErrorOut($string)  {
   //trigger_error('##|SANTYX ERROR<br/>?'.$string,E_USER_ERROR);

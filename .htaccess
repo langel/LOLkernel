@@ -4,10 +4,32 @@ Options +FollowSymlinks
 
 <IfModule mod_rewrite.c>
 
-  RewriteEngine on
-  RewriteCond %{REQUEST_FILENAME} !-f
-# RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(.*)?$ LOLindex.php?LOLquery=$1 [L]
+RewriteEngine on
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{DOCUMENT_ROOT}/app%{REQUEST_URI} -f
+#RewriteRule app/%{REQUEST_URI} [L]
+
+#RewriteCond %{REQUEST_URI} ^media/(.*)?$ -f
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^(.*)?$ app/$1 [L]
+
+
+RewriteRule ^meh/(.*)?$ app/assets_media/$1 [L]
+
+
+RewriteRule ^LOLmeh/(.*)?$ kernel/app/assets_media/$1 [L]
+
+#RewriteCond %{REQUEST_URI} ^media/(.*)?$ -f
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^(media)(.*)?$ app/assets_media$2 [L]
+
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteRule ^(media)(.*)?$ kernel/app/assets_media$2 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^(.*)?$ LOLindex.php?LOLquery=$1 [L]
   
 </IfModule>
 
