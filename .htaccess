@@ -11,6 +11,6 @@ RewriteRule ^LOLmeh/(.*)?$ kernel/app/assets_media/$1 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)?$ /LOLindex.php?LOLquery=$1 [L]
+RewriteRule ^(.*)?$ /LOLindex.php [L]
 
 </ifmodule>
