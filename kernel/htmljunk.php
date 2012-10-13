@@ -1,4 +1,4 @@
-<?php
+<?php defined('HOME_DIR') or die('LOLblech');
 
 class LOL_INTERFACE_HTMLJUNK {
 
@@ -67,11 +67,12 @@ class LOL_INTERFACE_HTMLJUNK {
 			throw new Exception('Render recursion depth limit of 42 exceeded. ');
 			return false;
 		}
-
+/*
 		#	Swizzle the RESTful command string into an array
 		if ($cmd==NULL) {
 			$cmd = urldecode(substr($_SERVER['REQUEST_URI'],1));
 		}
+*/
 		poke('command_calls[]',$cmd);
 		$a = explode('/',$cmd);
 		$WUT = $a[0];

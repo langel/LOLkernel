@@ -63,11 +63,11 @@ class LOL_INTERFACE_RAMSTACK	{
 	}
 
 	function ExtraGlobalSet(&$var) {
-		return LOL_INTERFACE_RAMSTACK::POKE('extra_globals[]',$var);
+		return LOL_INTERFACE_RAMSTACK::POKE('kernel|extra_globals[]',$var);
 	}
 
 	function &ExtraGlobalsGet() {
-		return LOL_INTERFACE_RAMSTACK::PEEK('extra_globals');
+		return LOL_INTERFACE_RAMSTACK::PEEK('kernel|extra_globals');
 	}
 }
 

@@ -1,7 +1,9 @@
-<?php
+<?php defined('HOME_DIR') or die('LOLblech');
+
 /*
 	Error Hand for handling errors and error messages.
 */
+
 
 
 function LOLKERNEL_ERROR_HAND($error_number,$string,$file,$line) {

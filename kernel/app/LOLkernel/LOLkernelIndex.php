@@ -19,3 +19,9 @@ LOLkernel will get your crap idea of a website off the ground.
 <p>
 <: $kernel_links ?>
 </p>
+
+<; if ($has_db) { ?>
+<h2>db hooked up</h2>
+<; } else { ?>
+<h2><a href="/LOLkernel/MySQLsetup">Hurry up and setup your database connection.</a></h2>
+<; } ?>

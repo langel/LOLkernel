@@ -1,4 +1,5 @@
-<?php
+<?php defined('HOME_DIR') or die('LOLblech');
+
 /************************************************************
 
   Firteen Electronic Content Engine System

@@ -1,4 +1,4 @@
-<?php
+<?php defined('HOME_DIR') or die('LOLblech');
 /*
  *		funclib == funk liberation
  *		not function library!! X|
@@ -18,10 +18,14 @@
 
 
 # define helpful things
-define('HOME_URL', 'http://'.$_SERVER['SERVER_NAME'].'/');
-define('HOME_DIR', $_SERVER['DOCUMENT_ROOT'].'/');
 define('CR', "\r\n");
 define('BR',"<br>\r\n");
+
+function redir($cmd) {
+	header("Location: $cmd");
+	die();
+}
+
 
 function PEEK($addr) {
 	return LOL_INTERFACE_RAMSTACK::PEEK($addr);

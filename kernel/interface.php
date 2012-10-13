@@ -1,4 +1,4 @@
-<?php
+<?php defined('HOME_DIR') or die('LOLblech');
 
 class LOL	{
 

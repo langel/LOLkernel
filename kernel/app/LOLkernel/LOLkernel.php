@@ -1,4 +1,4 @@
-<?php
+<?php defined('HOME_DIR') or die('LOLblech');
 
 // kernel root
 
@@ -34,7 +34,31 @@ if ($ACT=='Index') {
 		$kernel_links .= '<a class="button" href="/LOLkernel/'.$wut.'">'.$wut.'</a>';
 	}
 
+	if (LOL::PEEK('kernel|db')) $has_db = TRUE;
+
 }
 
+
+if ($ACT=='MySQLsetup') {
+
+	if (defined('DB_HOST')) {
+		die('DB configured; must be updated manually until LOLkernel has a user system.');
+	}
+	
+	$settings = array('DB_HOST', 'DB_USER', 'DB_PASS', 'DB_NAME');
+
+	if ($_POST['submit']) {
+		$f = fopen('disk/config/mysql.php','w');	
+		fwrite($f,'<?php defined(\'HOME_DIR\') or die(\'LOLblech\');'.CR);
+		fwrite($f,CR);
+		foreach ($settings as $s) {
+			fwrite($f,'define(\''.$s.'\',\''.$_POST[$s].'\');'.CR);
+		}
+		fwrite($f,CR.'?>');
+		fclose($f);
+		redir('/LOLkernel');
+	}
+
+}
 
 ?>
