@@ -16,7 +16,7 @@ class LOL_INTERFACE_RAMSTACK	{
 		return $self;
 	}
 
-	function PEEK($addr)	{
+	function &PEEK($addr)	{
 		$stack = LOL_INTERFACE_RAMSTACK::HANDSHAKE();
 		$addr = str_replace('|',"']['",$addr);
 		eval('$val = $stack->ram'."['".$addr."']".';');
@@ -68,6 +68,13 @@ class LOL_INTERFACE_RAMSTACK	{
 
 	function &ExtraGlobalsGet() {
 		return LOL_INTERFACE_RAMSTACK::PEEK('kernel|extra_globals');
+	}
+
+	function RamDump() {
+		$stack = LOL_INTERFACE_RAMSTACK::HANDSHAKE();
+		$dump = Capture('print_r(LOL_INTERFACE_RAMSTACK::HANDSHAKE()->ram)');
+		$dump = '<pre>'.htmlspecialchars($dump).'</pre>';
+		return $dump;
 	}
 }
 

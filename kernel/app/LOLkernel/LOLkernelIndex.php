@@ -25,3 +25,15 @@ LOLkernel will get your crap idea of a website off the ground.
 <; } else { ?>
 <h2><a href="/LOLkernel/MySQLsetup">Hurry up and setup your database connection.</a></h2>
 <; } ?>
+<p> </p>
+
+<h2 id="HostedLibraries">Hosted Libraries</h2>
+<; if ($libraries) { ?>
+<p>
+<: $libraries ?>
+</p>
+<; } ?>
+<form method="post" action="/LOLkernel/HostedLibraries">
+	Add a Library <input name="library">
+	<input type="submit" name="submit" val="submit">
+</form>

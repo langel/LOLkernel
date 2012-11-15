@@ -3,7 +3,7 @@
 class LOL_INTERFACE_HTMLJUNK {
 
 	function JS_attach($file,$hook='header') {
-	
+		POKE('HTMLJUNK|'.$hook.'|js_attach[]','<script src="'.$file.'"></script>');
 	}
 
 	function JS_add($code,$hook='header') {
@@ -21,8 +21,8 @@ class LOL_INTERFACE_HTMLJUNK {
 
 	function Hook($hook) {
 		$info = PEEK('HTMLJUNK|'.$hook);
-		if ($info['js_attach']) {
-			$a .= $info['js_attach'];
+		if (count($info['js_attach'])) foreach ($info['js_attach'] as $js) {
+			$a .= $js;
 		}
 		if ($info['js_add']) {
 			$a .= '<scipt type="text/javascript">'.CR.$info['js_add'].CR.'</script>';
@@ -30,6 +30,7 @@ class LOL_INTERFACE_HTMLJUNK {
 			// Your browser either does not support javascript or has it disabled.  :(
 			// </noscript>
 		}
+		return $a;
 	}
 
 	function HeaderSet($template) {
@@ -67,6 +68,8 @@ class LOL_INTERFACE_HTMLJUNK {
 			throw new Exception('Render recursion depth limit of 42 exceeded. ');
 			return false;
 		}
+
+		$errors = array();
 /*
 		#	Swizzle the RESTful command string into an array
 		if ($cmd==NULL) {
@@ -80,9 +83,9 @@ class LOL_INTERFACE_HTMLJUNK {
 		$ACT = $a[1];
 		if ($ACT=='') $ACT = 'Index';
 		// XXX should put a loop in here to allow many, many variables
-		$VAR1 = $a[2];
-		$VAR2 = $a[3];
-		$VAR3 = $a[4];
+		$PARAM1 = $a[2];
+		$PARAM2 = $a[3];
+		$PARAM3 = $a[4];
 
 		#	Load all extra globals set in boot.php into local code space
 		$extra_globals = LOL_INTERFACE_RAMSTACK::ExtraGlobalsGet();
@@ -101,7 +104,8 @@ class LOL_INTERFACE_HTMLJUNK {
 		else {
 			// XXX want this to have an error type too
 			// this would be a minor rendering or template control issue
-			throw new Exception('Unfound control file -- '.$control_file);
+			// throw new Exception('Unfound control file -- '.$control_file);
+			$errors[] = 'Unfound control file -- '.$control_file;			
 		}
 
 		#	Process the template.
@@ -112,24 +116,42 @@ class LOL_INTERFACE_HTMLJUNK {
 		else if (is_file('kernel/app/'.$template)) {
 			$template_file = 'kernel/app/'.$template;
 		}
-		if (!$template_file) {
+		if ($template_file==''||$output=='') {
 			// XXX want this to have an error type too
 			// this would be a minor rendering or template control issue
-			throw new Exception('Unfound template file -- '.$template);
-			return false;
+			//throw new Exception('Unfound template file -- '.$template);
+			//return false;
+			$errors[] = 'No output and/or Unfound template file -- '.$template;
 		}
-		$str = file_get_contents($template_file);
-		$str = str_replace('<o ','<?php echo $obj->',$str);
-		$str = str_replace('<: ','<?php echo ',$str);
-		$str = str_replace('<; ','<?php ',$str);		
-		ob_start();
-		eval(' ?>'.$str.'<?php ');
-		$render = ob_get_contents();
-		ob_end_clean();
-
+		if ($template_file) {
+			$str = file_get_contents($template_file);
+			$str = str_replace('<o ','<?php echo $obj->',$str);
+			$str = str_replace('<: ','<?php echo ',$str);
+			$str = str_replace('<; ','<?php ',$str);		
+			ob_start();
+			eval(' ?>'.$str.'<?php ');
+			$render = ob_get_contents();
+			ob_end_clean();
+		}
+		if ($output!='') {
+			$render = $output.$render;
+		}
+		
 		#	...keeping track of the render depth  :D/
 		LOL::DEC('RenderRecursionDepth');
+		
+		#	Process errors.
+		if (count($errors)>=2) {
+			$four_oh_four = LOL::PEEK('kernel|404');
+			if ($four_oh_four!='') {
+				return LOL::Render($four_oh_four);
+			}
+			else {
+				return implode(BR,$errors);
+			}
+		}
 
+		# All good, send this turkey home!
 		return $render;
 	}
 

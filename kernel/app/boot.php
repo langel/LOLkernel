@@ -21,6 +21,13 @@ if (defined('DB_HOST')) {
 
 # Need to prep anything before rendering the page?
 
+	
+$libraries_file = 'kernel/app/assets_media/hosted_libraries.cfg';
+if (is_file($libraries_file)) {
+	$libs = json_decode(FileRead($libraries_file),TRUE);
+	foreach ($libs as $lib) LOL::JS_attach($lib,'LOLkernel_header');
+}
+
 
 if (is_file('app/boot.php')) {
 	require('app/boot.php');
