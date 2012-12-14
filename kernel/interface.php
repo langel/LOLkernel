@@ -13,6 +13,7 @@ class LOL	{
 
 	function Hook($hook) { return LOL_INTERFACE_HTMLJUNK::Hook($hook); }
 	function JS_attach($file,$hook='header') { return LOL_INTERFACE_HTMLJUNK::JS_attach($file,$hook); }
+	function CSS_attach($file,$hook='header') { return LOL_INTERFACE_HTMLJUNK::CSS_attach($file,$hook); }
 
 
 	#	RAMSTACK
