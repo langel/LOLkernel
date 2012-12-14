@@ -116,7 +116,7 @@ class LOL_INTERFACE_HTMLJUNK {
 		else if (is_file('kernel/app/'.$template)) {
 			$template_file = 'kernel/app/'.$template;
 		}
-		if ($template_file==''||$output=='') {
+		if ($template_file==''&&$output=='') {
 			// XXX want this to have an error type too
 			// this would be a minor rendering or template control issue
 			//throw new Exception('Unfound template file -- '.$template);

@@ -29,10 +29,7 @@ if (is_file($libraries_file)) {
 }
 
 
-if (is_file('app/boot.php')) {
-	require('app/boot.php');
-}
-else {
+if (!is_file('app/boot.php')) {
 	LOL::HeaderSet('LOLkernel/Header');
 	LOL::FooterSet('LOLkernel/Footer');
 }

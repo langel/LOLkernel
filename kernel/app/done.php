@@ -1,7 +1,5 @@
 <?php
 
-if (is_file('app/done.php')) require('app/done.php');
-
 if (IsAjaxRequest()) {
 	// prepare ajax response
 }
