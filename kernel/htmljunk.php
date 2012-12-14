@@ -7,13 +7,15 @@ class LOL_INTERFACE_HTMLJUNK {
 	}
 
 	function JS_add($code,$hook='header') {
-		POKE('HTMLJUNK|'.$hook.'|js_add',$code);
+		POKE('HTMLJUNK|'.$hook.'|js_add',PEEK('HTMLJUNK|'.$hook.'|js_add'.$code));
 	}
 
-	function CSS_attach($file) {
+	function CSS_attach($file,$hook='header') {
+		POKE('HTMLJUNK|'.$hook.'|css_attach[]','<link href="'.$file.'" rel="stylesheet">');
 	}
 
-	function CSS_add($code) {
+	function CSS_add($code,$hook='header') {
+		POKE('HTMLJUNK|'.$hook.'|css_add',PEEK('HTMLJUNK|'.$hook.'|css_add'.$code));
 	}
 
 	function META_add($code) {
@@ -22,13 +24,19 @@ class LOL_INTERFACE_HTMLJUNK {
 	function Hook($hook) {
 		$info = PEEK('HTMLJUNK|'.$hook);
 		if (count($info['js_attach'])) foreach ($info['js_attach'] as $js) {
-			$a .= $js;
+			$a .= $js.CR;
 		}
 		if ($info['js_add']) {
 			$a .= '<scipt type="text/javascript">'.CR.$info['js_add'].CR.'</script>';
 			// <noscript>  
 			// Your browser either does not support javascript or has it disabled.  :(
 			// </noscript>
+		}
+		if ($info['css_attach']) foreach ($info['css_attach'] as $css) {
+			$a .= $css.CR;
+		}
+		if ($info['css_add']) {
+			// XXX fill it in
 		}
 		return $a;
 	}
