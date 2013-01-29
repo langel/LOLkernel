@@ -36,6 +36,7 @@ class LOL_INTERFACE_RAMSTACK	{
 		$val_original = $val;
 		if (is_string($val)) {
 			$val = str_replace("'","\'",$val);
+			if (substr($val,-1)=="\\") $val .= "\\";
 		}
 		eval('$stack->ram'.$addr.' = \''.$val.'\';');
 		return $val_original;
