@@ -102,12 +102,9 @@ class LOL_INTERFACE_HTMLJUNK {
 		}
 
 		#	Process the controller.
-		$control_file = $WUT.'/'.$WUT.'.php';
-		if (is_file('app/'.$control_file)) {
-			include('app/'.$control_file);
-		}
-		else if (is_file('kernel/app/'.$control_file)) {
-			include('kernel/app/'.$control_file);
+		$control_file = LOL::ScriptFind($WUT, '.php');
+		if ($control_file) {
+			include($control_file);
 		}
 		else {
 			// XXX want this to have an error type too
@@ -117,13 +114,7 @@ class LOL_INTERFACE_HTMLJUNK {
 		}
 
 		#	Process the template.
-		$template = $WUT.'/'.$WUT.$ACT.'.php';
-		if (is_file('app/'.$template)) {
-			$template_file = 'app/'.$template;
-		}
-		else if (is_file('kernel/app/'.$template)) {
-			$template_file = 'kernel/app/'.$template;
-		}
+		$template_file = LOL::ScriptFind($WUT, $ACT.'.php');
 		if ($template_file==''&&$output=='') {
 			// XXX want this to have an error type too
 			// this would be a minor rendering or template control issue

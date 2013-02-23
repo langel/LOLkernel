@@ -2,6 +2,8 @@
 
 require('kernel/funclib.php');
 
+require('kernel/protojunk.php');
+
 require('kernel/ramstack.php');
 require('kernel/fohat.php');
 require('kernel/errorhand.php');

@@ -24,6 +24,17 @@ class LOL	{
 	function DEC($addr) { return LOL_INTERFACE_RAMSTACK::DEC($addr); }
 	function RamDump() { return LOL_INTERFACE_RAMSTACK::RamDump(); }
 
+
+	# AJAXIAN
+
+	function PrefGet() {}
+	function PrefSet() {}
+
+
+	# SYSTUF
+
+	function ScriptFind($what, $suffix) { return LOL_INTERFACE_SYSTUF::ScriptFind($what, $suffix); }
+
 }
 
 ?>

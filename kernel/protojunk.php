@@ -1,6 +1,24 @@
 <?php defined('HOME_DIR') or die('LOLblech');
 
 
+class LOL_INTERFACE_SYSTUF {
+
+
+	function ScriptFind($what, $suffix) {
+		$script = $what.'/'.$what.$suffix;
+		if (is_file('app/'.$script)) {
+			return 'app/'.$script;
+		}
+		else if (is_file('kernel/app/'.$script)) {
+			return 'kernel/app/'.$script;
+		}
+		else return FALSE;
+	}
+
+
+}
+
+
 /* 
 
 	url and header tools?
