@@ -2,7 +2,7 @@ What's in a name?
 
 Surely LOLkernel was not the best I could do for a name, but most of the funny, short names I've come up with are already taken.  I'm willing to settle on LOLkernel for a good while now; it's good enough at present.  At the time of this writing LOLkernel is hardly in a beta stage of development.  At the very least, this moniker is a step up from the previous incarnation's Firteen Electronic Content Engine System (or FECES for short).
 
-LOLkernel itself stems from two concepts. 1) a modernly trained computer scientist might likely skoff (or laugh-out-loud) at the system's design.  2) the core system itself, known as the 'kernel', is highly inspired by the working environments provided by 8-bit machines of the early home computer market in the 1980's.
+The name "LOLkernel" itself is a compound term stemming from two concepts : 1) a traditionaly trained computer scientist might likely skoff (or laugh-out-loud) at the system's design.  2) the core system itself, known as the 'kernel', is highly inspired by the working environments provided by 8-bit machines of the early home computer market in the 1980's.
 
 
 
@@ -11,6 +11,13 @@ Philosophy
 LOLkernel's model was born from necessity : Rapid development is the goal.  Files are organized for quicker access, many tools have been crafted for serving web pages, and a fresh coding paradigm leaning towards classic modular programming rather than object oriented programming.  Instead of a traditional Model-View-Controller (MVC) software architecture, LOLkernel offers a Recursive-Model-Template-Controller (RMTC) workflow.  MVC and it's intrinsic relationship with OOP can often feel more like OOD (object oriented diarhea).  By setting certain rules and guidelines it is still possible to setup a very free work environment.  
 
 LOLkernel was designed for a single purpose : serving dynamic web pages with a minimal amount of code.
+
+
+
+Requirements
+
+apache/php/mysql for now . . .
+Any LAMPP or XAMPP style package will do for developing locally.
 
 
 
