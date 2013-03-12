@@ -102,7 +102,7 @@ class LOL_INTERFACE_HTMLJUNK {
 		}
 
 		#	Process the controller.
-		$control_file = LOL::ScriptFind($WUT, '.php');
+		$control_file = LOL::ScriptFind($WUT,'.php');
 		if ($control_file) {
 			include($control_file);
 		}
@@ -114,15 +114,18 @@ class LOL_INTERFACE_HTMLJUNK {
 		}
 
 		#	Process the template.
-		$template_file = LOL::ScriptFind($WUT, $ACT.'.php');
+		$template_file = LOL::ScriptFind($WUT,$ACT.'.php');
 		if ($template_file==''&&$output=='') {
 			// XXX want this to have an error type too
 			// this would be a minor rendering or template control issue
 			//throw new Exception('Unfound template file -- '.$template);
 			//return false;
-			$errors[] = 'No output and/or Unfound template file -- '.$template;
+			$errors[] = 'No $output and/or Unfound template file -- '.$template;
 		}
-		if ($template_file) {
+		elseif ($output!='') {
+			$render = $output.$render;
+		}
+		elseif ($template_file) {
 			$str = file_get_contents($template_file);
 			$str = str_replace('<o ','<?php echo $obj->',$str);
 			$str = str_replace('<: ','<?php echo ',$str);
@@ -131,9 +134,6 @@ class LOL_INTERFACE_HTMLJUNK {
 			eval(' ?>'.$str.'<?php ');
 			$render = ob_get_contents();
 			ob_end_clean();
-		}
-		if ($output!='') {
-			$render = $output.$render;
 		}
 		
 		#	...keeping track of the render depth  :D/

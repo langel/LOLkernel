@@ -38,7 +38,9 @@ At this point, there are 3 ways we could go about displaying the string "Hello, 
 $output = 'Hello, world!';
 ?>
 
-This file, boot.php, will be loaded everytime your webapp is accessed.  This means that $output will display on every page loaded.  While this gets our string on the page it's much too static to be usable.  You might also think this is a good place to put your page's header but you're wrong.  We'll learn about headers and footers later on....
+$output is an especially reserved variable.  If it is set then it will be the rendered content.  If it is not set then a template is hunted for.  If neither is set/exists then a 404 is thrown.
+
+The file boot.php will be loaded everytime your webapp is accessed.  This means that $output will display on every page loaded.  While this gets our string on the page it's much too static to be usable.  You might also think this is a good place to put your page's header but you're wrong.  We'll learn about headers and footers later on....
 
 
 2) Create 'LOLkernel/app/index/index.php' and give it the same code as example 1.  
