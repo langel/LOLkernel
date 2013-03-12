@@ -1,0 +1,44 @@
+What's in a name?
+
+Surely LOLkernel was not the best I could do for a name, but most of the funny, short names I've come up with are already taken.  I'm willing to settle on LOLkernel for a good while now; it's good enough at present.  At the time of this writing LOLkernel is hardly in a beta stage of development.  At the very least, this moniker is a step up from the previous incarnation's Firteen Electronic Content Engine System (or FECES for short).
+
+LOLkernel itself stems from two concepts. 1) a modernly trained computer scientist might likely skoff (or laugh-out-loud) at the system's design.  2) the core system itself, known as the 'kernel', is highly inspired by the working environments provided by 8-bit machines of the early home computer market in the 1980's.
+
+
+
+Philosophy
+
+LOLkernel's model was born from necessity : Rapid development is the goal.  Files are organized for quicker access, many tools have been crafted for serving web pages, and a fresh coding paradigm leaning towards classic modular programming rather than object oriented programming.  Instead of a traditional Model-View-Controller (MVC) software architecture, LOLkernel offers a Recursive-Model-Template-Controller (RMTC) workflow.  MVC and it's intrinsic relationship with OOP can often feel more like OOD (object oriented diarhea).  By setting certain rules and guidelines it is still possible to setup a very free work environment.  
+
+LOLkernel was designed for a single purpose : serving dynamic web pages with a minimal amount of code.
+
+
+
+Installation
+
+In the future LOLkernel will have a downloadable stable .zip archive, but for right now we're stuck in github land.  Fork the repo to your website's root directory.  You'll notice that it won't load properly because all of the code is in the LOLkernel directory.  You can try going to (yourwebsitedomain)/LOLkernel and you'll see it load, but this is not the behavior that we're looking for.  You'll need to create (or replace) the .htaccess file in your website's root directory like so --
+
+RewriteEngine On
+RewriteRule ^(.*)$ /LOLkernel/$1
+
+Now refresh (yourwebsitedomain) in the browser.  The page will look the same, loading the LOLkernel SysOp interface, but we're now masking the fact that the application is not sitting absolutely root to the domain.  All is well.  I hope.  :X
+
+
+
+"Hello, world!" Tutorial
+
+Now is the time to give birth to your webapp!  First, create a directory called 'app' inside of the LOLkernel directory.  This is where all things make your webapp come to life will live in a specific way which we'll learn about as we go through this quick start guide.  Next, create a directory called 'index' inside of the 'app' one.  When LOLkernel gets an empty URL request this is the first place it looks for instructions.  If LOLkernel does not detect any ready output it will default to it's SysOp interface.
+
+At this point, there are 3 ways we could go about displaying the string "Hello, world!" to the browser.
+
+
+1) Create 'LOLkernel/app/boot.php' and give it the following code --
+
+<?php
+$output = 'Hello, world!';
+?>
+
+This file, boot.php, will be loaded everytime your webapp is accessed.  This means that $output will display on every page loaded.  While this gets our string on the page it's much too static to be usable.  You might also think this is a good place to put your page's header but you're wrong.  We'll learn about headers and footers later on....
+
+
+2) Create 'LOLkernel/app/index/index.php' and give it the same code as example 1.  
