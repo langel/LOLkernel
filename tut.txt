@@ -17,6 +17,7 @@ LOLkernel was designed for a single purpose : serving dynamic web pages with a m
 Requirements
 
 apache/php/mysql for now . . .
+a unique (sub)domain; localhost is jee golly swell!!
 Any LAMPP or XAMPP style package will do for developing locally.
 
 
