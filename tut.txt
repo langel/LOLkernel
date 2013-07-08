@@ -18,7 +18,7 @@ Requirements
 
 apache/php/mysql for now . . .
 a unique (sub)domain; localhost is jee golly swell!!
-Any LAMPP or XAMPP style package will do for developing locally.
+Any LAMPP or XAMPP style package will do fine for developing locally.
 
 
 
@@ -51,4 +51,26 @@ $output is an especially reserved variable.  If it is set then it will be the re
 The file boot.php will be loaded everytime your webapp is accessed.  This means that $output will display on every page loaded.  While this gets our string on the page it's much too static to be usable.  You might also think this is a good place to put your page's header but you're wrong.  We'll learn about headers and footers later on....
 
 
-2) Create 'LOLkernel/app/index/index.php' and give it the same code as example 1.  
+2) Create 'LOLkernel/app/index/index.php' and move the code there from example 1.  You get the same results.  This is your app's index controller and it is loaded by default when no controller is specified in the URL.
+
+
+3) Create 'LOLkernel/app/index/indexIndex.php' with 'Hello, world!' in it.  This is your app's index template.  By default $output is now ignored because a template is found.  If you would like to see $output appear inside your template use the following code --
+
+<?php echo $output; ?>
+
+or use
+
+<: $ouput ?> which is a shorthand provided by the LOLkernel template system.
+
+
+
+
+
+
+APPENDIX
+
+Fohat Database Schema
+
+id
+what_id
+info
