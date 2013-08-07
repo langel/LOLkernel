@@ -1,0 +1,9 @@
+<?php
+/*
+
+	Boot your app!
+
+*/
+
+
+?>
