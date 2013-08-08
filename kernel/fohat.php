@@ -143,16 +143,6 @@ class FOHAT {
   }
 
 
-  function FetchList($where='') {
-    $qr = mysql_query("SELECT `$this->table_name`.* FROM `$this->table_name` $where;");
-    STACK::INC('FOHAT|FETCH_LIST');
-    $results = array();
-    while ($a = @mysql_fetch_assoc($qr))
-      eval('$results[] =& '.$this->table_name.'::Pop($a);');
-    return $results;
-  }
-
-
   function Delete($id=0) {
     if ($id<1) $id = $this->id;
     $qr = mysql_query("DELETE FROM `$this->table_name` WHERE id = '$id' LIMIT 1;");
@@ -249,7 +239,7 @@ class uHAT  {
 
   function Fetch($table,$id) {
     // returns object but not stored in STACK
-    eval('$a = '.$table.'::Pop('.$id.');');
+    $a = $table::Pop($id);;
     STACK::INC('FOHAT|uFETCH');
     return $a;
   }
@@ -262,9 +252,7 @@ class uHAT  {
     //print "SELECT `id` FROM `$table` $where LIMIT 1;";
     if (@mysql_num_rows($qr)) {
       $qr = mysql_fetch_assoc($qr);
-      eval('$a = new '.$table.';');
-      eval('$a = '.$table.'::Pop($qr);');
-      return $a;
+      return $table::Pop($qr);
     }
     else return FALSE;
   }
@@ -273,8 +261,7 @@ class uHAT  {
     $qr = mysql_query("SELECT `$table`.* FROM `$table` $where ORDER BY RAND() LIMIT $limit;");
     STACK::INC('FOHAT|uRANDOM');
     if (@mysql_num_rows($qr)) {
-      eval('$a = '.$table.'::Pop(mysql_result($qr,0));');
-      return $a;
+      return $table::Pop(mysql_result($qr,0));
     }
     else return FALSE;
   }

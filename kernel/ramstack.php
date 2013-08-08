@@ -89,19 +89,22 @@ class LOL_INTERFACE_RAMSTACK	{
 		}
 		if ($error=='') {
 			$stack = LOL_INTERFACE_RAMSTACK::HANDSHAKE();
-			if (isset($stack->ram['wuts'][$what][$id])) {
-				return $stack->ram['wuts'][$what][$id];
+			if (!isset($stack->ram['wuts'][$what][$id])) {
+				$stack->ram['wuts'][$what][$id] = $what::Pop($id);
 			}
-			else {
-				eval('$stack->ram[\'wuts\'][$what][$id] = '.$what.'::Pop('.$id.');');
-				return $stack->ram['wuts'][$what][$id];
-			}
+			return $stack->ram['wuts'][$what][$id];
 		}
 		return LOL::ERROR_OUT($error);
 	}
 
-
 	function &Find($what,$where) {
+		$a = uHAT::Find($what,$where);
+		if (!$a) return FALSE;
+		$stack = LOL_INTERFACE_RAMSTACK::HANDSHAKE();
+		if (!isset($stack->ram['wuts'][$what][$a->id])) {
+			$stack->ram['wuts'][$what][$a->id] = $a;
+		}
+		return $stack->ram['wuts'][$what][$id];
 	}
 
 	function Cat($what,$where) {

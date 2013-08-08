@@ -1,5 +1,0 @@
-These are the original kernel files for LOLkernel's precursor, the Firteen Electronic Content Engine System.
-
-_FECES.php belonged in the apps root directory.
-
-All other files were in the kernel directory.
