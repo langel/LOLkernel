@@ -99,6 +99,24 @@ class LOL_INTERFACE_RAMSTACK	{
 		}
 		return LOL::ERROR_OUT($error);
 	}
+
+
+	function &Find($what,$where) {
+	}
+
+	function Cat($what,$where) {
+		$a = uHAT::Cat($what,$where);
+		if (!$a) return FALSE;
+		$stack = LOL_INTERFACE_RAMSTACK::HANDSHAKE();
+		$resluts = array();
+		foreach ($a as $b) {
+			if (!isset($stack->ram['wuts'][$what][$b->id])) {
+				$stack->ram['wuts'][$what][$b->id] = $b;
+			}
+			$resluts[] = &$stack->ram['wuts'][$what][$b->id];
+		}
+		return $resluts;
+	}
 				
 
 

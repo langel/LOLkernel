@@ -1,5 +1,4 @@
-<?php defined('HOME_DIR') or die('LOLblech');
-
+<?php
 /************************************************************
 
   Firteen Electronic Content Engine System
@@ -11,40 +10,34 @@
 ************************************************************/
 
 
-function __autoload($wut) {
-	FOHAT::AUTOLOAD($wut);
+function __autoload($class) {
+  $classfile = 'whats/'.$class.'/'.$class.'_class.php';
+  if (is_file($classfile))
+    require_once($classfile);
+  else
+    eval("class {$class} extends FOHAT {
+    function {$class}() {
+      \$this->table_name = '{$class}';
+    }
+
+    function Pop(\$id) {
+      \$a = new {$class};
+      \$a->Load(\$id);
+      return \$a;
+    }
+}");
 }
+
+
+/************************************************************
+
+  S.L.U.D.L. -- a Database Access Object
+
+************************************************************/
 
 
 class FOHAT {
 
-	function AUTOLOAD($wut) {
-
-		$model_file = $wut.'/'.$wut.'_class.php';
-
-		if (is_file('app/'.$model_file)) {
-			require_once('app/'.$model_file);
-		}
-		elseif (is_file('kernel/app'.$model_file)) {
-			require_once('kernel/app'.$model_file);
-		}
-		else {
-		// XXX	should we check if there is an existing table first?
-		//		could keep table schema in disk directory
-			eval("class {$wut} extends FOHAT {
-				function __construct() {
-				  \$this->table_name = '{$wut}';
-				}
-
-				function Pop(\$id) {
-				  \$a = new {$wut};
-				  \$a->Load(\$id);
-				  return \$a;
-				}
-			}");
-		}
-	}
-	
 
   function Insert() {
     // used when `id` is manually set before first Save()
@@ -110,9 +103,8 @@ class FOHAT {
         $this->$key = $val;
       return $this->id;
     }
-		print_r($id);
     $qr = mysql_query("SELECT `$this->table_name`.* FROM `$this->table_name` WHERE id = '$id' LIMIT 1;");
-    LOL::INC('FOHAT|LOAD');
+    STACK::INC('FOHAT|LOAD');
     // assoc the fields to vars
     if (@mysql_num_rows($qr)) {
       $m = mysql_fetch_assoc($qr);
@@ -160,6 +152,7 @@ class FOHAT {
     if ($qr) return $this->id;
   }
 
+  /*vibes of confusations; frustrations for celebrations.  change of focus; hocus pocus.  new inventions attract attentions.  never mention the flying locust; it's bogus -- your logic is opinion.  the minions swallow cinnamon.  it's a beginning of of a degrade -- a push in into a new age.  intellect wades and wanes into a cascade.  play the arcade and let your brain jade.--b00daW*/
 /* one man bands ftw  lol  */  //tshirt idea
 }
 
@@ -220,6 +213,16 @@ class uHAT  {
     return mysql_result($qr,0);
   }
 
+  function FetchArray($table,$where='') {
+    $qr = mysql_query("SELECT `$table`.* FROM `$table` $where;");
+    STACK::INC('FOHAT|uFETCH_ARRAY');
+		if (@mysql_num_rows($qr)==0) return FALSE;
+			$results = array();
+    //print "SELECT `$table`.* FROM `$table` $where;";
+    while ($a = @mysql_fetch_assoc($qr))
+      $results[] = $a;
+    return $results;
+  }
 
   function QueryArray($query) {
     // for more complicated queries with JOINS and DISTINCT....
@@ -232,20 +235,15 @@ class uHAT  {
     return $results;
   }
 
-
-
-  function Cat($table,$where='') {
+  function FetchList($table,$where='') {
     // returns object list but not stored in STACK
     $qr = mysql_query("SELECT `$table`.* FROM `$table` $where;");
-    LOL::INC('FOHAT|uFETCH_CAT');
-    $resluts = array();
-    while ($a = @mysql_fetch_assoc($qr)) {
-      $resluts[] =& $table::Pop($a);
-		}
-    return $resluts;
+    STACK::INC('FOHAT|uFETCH_LIST');
+    $results = array();
+    while ($a = @mysql_fetch_assoc($qr))
+      eval('$results[] =& '.$table.'::Pop($a);');
+    return $results;
   }
-
-
 
   function Fetch($table,$id) {
     // returns object but not stored in STACK
