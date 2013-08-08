@@ -6,33 +6,34 @@
 	// XXX should we put on our big kid pants and add a proper php exception class?!?? :X
 */
 
-set_error_handler('LOL::ERROR_HANDLER', E_ALL ^ E_NOTICE);
+error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT);
+@set_error_handler('LOL_KERNEL_ERROR_HANDLER', E_ALL ^ E_NOTICE ^ E_STRICT);
+
+function LOL_KERNEL_ERROR_HANDLER($error_number,$string,$file,$line) {
+	switch ($error_number) {
+	case E_USER_ERROR:
+		$msg = '|SANTYX ERROR :: '.$string.BR;
+		$msg .= $file.' on line '.$line.BR;
+		// XXX	save to STACK['PAGE_BUILD'] here or before return?
+		PageAppend($msg.LOL__ERROR_HAND::BacktraceText());
+		exit(1);
+		break;
+	case E_USER_WARNING:
+		PageAppend('WARNING :: '.$string.BR);
+		break;
+	case E_USER_NOTICE:
+		PageAppend('NOTICE :: '.$string.BR);
+		break;
+	default:
+		PageAppend('UNDEFINED FAULT :: '.$string.BR);
+		echo '<pre>'.LOL__ERROR_HAND::BacktracePrintout().'</pre>';
+		break;
+	}
+	return true;
+}
 
 
 class LOL__ERROR_HAND {
-
-	function LER($error_number,$string,$file,$line) {
-		switch ($error_number) {
-		case E_USER_ERROR:
-			$msg = '|SANTYX ERROR :: '.$string.BR;
-			$msg .= $file.' on line '.$line.BR;
-			// XXX	save to STACK['PAGE_BUILD'] here or before return?
-			PageAppend($msg.LOL__ERROR_HAND::ReturnBacktrace());
-			exit(1);
-			break;
-		case E_USER_WARNING:
-			PageAppend('WARNING :: '.$string.BR);
-			break;
-		case E_USER_NOTICE:
-			PageAppend('NOTICE :: '.$string.BR);
-			break;
-		default:
-			PageAppend('UNDEFINED FAULT :: '.$string.BR);
-			echo '<pre>'.LOL__ERROR_HAND::GetBackTrace().'</pre>';
-			break;
-		}
-		return true;
-	}
 
 
 	function ErrorOut($string)  {

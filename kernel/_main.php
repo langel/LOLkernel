@@ -44,9 +44,9 @@ class LOL	{
 
 	function &Fetch($what,$id) { return LOL_INTERFACE_RAMSTACK::Load($what,$id); }
 
-	function &Find($what,$where) { return LOL_INTERFACE_REMSTACK::Find($what,$where) }
+	function &Find($what,$where) { return LOL_INTERFACE_REMSTACK::Find($what,$where); }
 
-	function Cat($what,$where='') { return LOL_INTERFACE_RAMSTACK::Cat($what,$where=''); }
+	function Cat($what,$where='') { return LOL_INTERFACE_RAMSTACK::Cat($what,$where); }
 
 
 	# AJAXIAN
@@ -63,7 +63,6 @@ class LOL	{
 	# ERROR HAND
 
 	function ERROR($message) { return LOL__ERROR_HAND::ErrorOut($messgae); }
-	function ERROR_HANDLER($error_number,$string,$file,$line) { return LOL__ERROR_HAND::LER($error_number,$string,$file,$line); }
 	function BacktracePrintout() { return LOL__ERROR_HAND::Backtrace(); }
 	function BacktraceText() {return LOL__ERROR_HAND::BacktraceText(); }
 

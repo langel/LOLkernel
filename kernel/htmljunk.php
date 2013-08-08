@@ -1,25 +1,33 @@
 <?php defined('HOME_DIR') or die('LOLblech');
 
+
+
 class LOL_INTERFACE_HTMLJUNK {
+
 
 	function JS_attach($file,$hook='header') {
 		POKE('HTMLJUNK|'.$hook.'|js_attach[]','<script src="'.$file.'"></script>');
 	}
 
+
 	function JS_add($code,$hook='header') {
 		POKE('HTMLJUNK|'.$hook.'|js_add',PEEK('HTMLJUNK|'.$hook.'|js_add'.$code));
 	}
+
 
 	function CSS_attach($file,$hook='header') {
 		POKE('HTMLJUNK|'.$hook.'|css_attach[]','<link href="'.$file.'" rel="stylesheet">');
 	}
 
+
 	function CSS_add($code,$hook='header') {
 		POKE('HTMLJUNK|'.$hook.'|css_add',PEEK('HTMLJUNK|'.$hook.'|css_add'.$code));
 	}
 
+
 	function META_add($code) {
 	}
+
 
 	function Hook($hook) {
 		$info = PEEK('HTMLJUNK|'.$hook);
@@ -41,9 +49,11 @@ class LOL_INTERFACE_HTMLJUNK {
 		return $a;
 	}
 
+
 	function HeaderSet($template) {
 		POKE('HTMLJUNK|template_header', $template);
 	}
+
 
 	function HeaderGet() {
 		$template = PEEK('HTMLJUNK|template_header');
@@ -53,9 +63,11 @@ class LOL_INTERFACE_HTMLJUNK {
 		else return '';
 	}
 
+
 	function FooterSet($template) {
 		POKE('HTMLJUNK|template_footer', $template);
 	}
+
 
 	function FooterGet() {
 		$template = PEEK('HTMLJUNK|template_footer');
@@ -64,6 +76,8 @@ class LOL_INTERFACE_HTMLJUNK {
 		}
 		else return '';
 	}
+
+
 
 
 	function Render($cmd=NULL)	{

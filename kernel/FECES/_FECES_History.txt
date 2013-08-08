@@ -1,0 +1,277 @@
+/*================================================
+
+  -==Firteen Electronic Content Engine System==-
+  
+                Update Histories
+
+================================================*/
+
+XAMPP NOTES==
+  apache/conf/httpd.conf  line 118 enable mod_rewrite.so
+  apache/bin/php.ini      line 582 enable php_curl.dll
+
+FUTURE TODOS==
+  an installer
+  SysOp package autodetect yet-to-be installed packages
+  HTML Form API/class
+  cross-site synching of files and database ROTFL
+  allow template file substitutions with generated content held in string
+  
+QUESTIONS==
+  should system utils like TableList & uploadpic be moved to kernel?
+
+CURRENT BUGS==
+  package base class must be loaded to get to other classes (form/forum/sysop)
+  SysOp Whats generator has no error handling!! =0 bad on teh SQLz!!  D:
+  poke() & peek() don't handle pointers correctly
+
+
+
+	F.E.C.E.S. Update			 v0.80.120222
+	
+STACK::TableInfo() now calls uHAT::FetchTableFields() w/ 2 less mysql calls
+
+
+
+  F.E.C.E.S. Update      v0.80.090419
+  
+boot.php created in whats root, refactored from index.php
+
+
+
+  F.E.C.E.S. Update      v0.79.090101
+  
+FORM class with jQuery/php validation
+FOHAT encodes Arrays to JSON during Save()/Update()
+custom Backtrace with trigger_error($string,E_USER_ERROR);
+there must be something undocumented since august?!?!? =o
+
+
+
+  F.E.C.E.S. Update      v0.74.080821
+  
+headers and footers get rendered
+added more error checking here and there
+h00ray i;m in Hawai'i
+
+
+
+  F.E.C.E.S. Update      v0.73.080722
+  
+updated SysOp files to match many previous changes
+  
+
+
+  F.E.C.E.S. Update      v0.72.080710
+  
+__autoload()::Pop() finally works!! :D:D:D
+poke() & STACK::POKE() handles quotes in $val just fine
+much miscelanious
+
+
+
+  F.E.C.E.S. Update      v0.71.080705
+  
+FOTAD methods FetchList() and Find() wrapped by STACK
+  STACK::FetchList() builds off uHAT::FetchArray()
+  STACK::FindObject() does likewise -- h00rayz MEM mngmnt  
+
+
+
+  F.E.C.E.S. Update      v0.70.080703
+  
+FOTAD (feces object to access database) renamed to
+  FOHAT (feces ontology, habitat adit tables  OR
+  	 feces ontological halo/helm accessing tables)
+  HashList() renamed FetchList()
+  SLUDhL namesake dropped too -- many class extensions modified
+uHAT methods of Count(), FetchList(), FetchTableInfo(), Find(), Random() 
+  working for uninstanciated classes per Paamayim Nekudotayim
+
+
+
+  F.E.C.E.S. Update      v0.67.080620
+
+template macros for inline php
+did some refactoring in the core
+uploadpic_class has better error handling
+
+
+
+  F.E.C.E.S. Update      v0.65.080602
+
+UploadPic much more versatile
+rendering content pre-header call so views can properly affect it
+killed majik quotes with .htaccess
+	$obj->{Save()|Update()} now inserts slashes
+
+
+
+  F.E.C.E.S. Update      v0.63.080521
+  
+gutted FECES_reg for KERNEL WRAPPER
+STACK::Handshake() replaces $Site
+SLOT & SWATCH system introduced
+load/add javascripts dynamically per need
+
+
+
+  F.E.C.E.S. Update      v0.59.080508
+
+FOTAD and STACK working together for TableInfo
+'includes' folder renamed 'kernel'
+opting for whats-based default code generation to be modified
+	with whatsFactory over dynamic forms handler for now...
+much object based code generation tested & working! =D/
+
+
+
+  F.E.C.E.S. Update      v0.56.080418
+  
+form @ strict db bootstrap automation
+	generation, validation, storing
+jQuery integration started
+
+
+
+  F.E.C.E.S. Update      v0.54.080403
+  
+stack singleton for universal memories
+Form Factory just scraping by...
+many adjustments to SysOp What
+
+
+
+  F.E.C.E.S. Update      v0.52.080325
+
+LOCAL_PATHS now autodetected
+custom error message for MySQL connection failure 
+majik quotes detection for manual addslashes
+
+  
+
+  F.E.C.E.S. Update      v0.51.080315
+  
+Site::Metas == array  (set HTML lines of meta data)
+user package had some serious holes --
+	resend confirmation, forgot/change password
+SLUDhL Update() keeps old value on failed query
+
+
+
+  F.E.C.E.S. Update      v0.50.080312
+  
+SysOp pack up to speed with architecture
+Header, Footer & all CSS in styles dir
+
+
+
+  F.E.C.E.S. Update      v0.49.080307
+  
+TableList module
+Site::StyleSheets = array
+
+
+
+  F.E.C.E.S. Update      v0.47.080227
+  
+_FECES_reg now $Site singleton registry object
+_FECES_lib replaces LibraryToolz
+_FOTAD_lib replaces _classes
+reorganized Packages' filetree --
+	Admin files/functions in respective Whats folders
+
+
+
+  F.E.C.E.S. Update      v0.43.080223
+  
+.htaccess cut down - FECES Object parses URL request
+SLUDhL Bonus Widget - Random()
+
+
+
+  F.E.C.E.S. Update      v0.42.080220
+  
+SLUDhL covertly auto Pop()s  [epic fail]
+hashList streamlined
+
+
+
+  F.E.C.E.S. Update      v0.40.080219
+  
+Packages initiated -- filetree restructured
+UTF-8 Unicode now the database and HTML standard 
+	{MySQL collation == utf8_unicode_bin}
+	{script files still in ASCII}
+
+
+
+  F.E.C.E.S. Update      v0.38.080101
+  
+SLUDhL - bonus widgets Count() & Find()
+various things that haven't been tracked in 2 months  :D
+seperated mail object from user object
+
+
+
+  F.E.C.E.S. Update 	v0.32.071024
+  
+SysOp CRUD started -- 
+	`Create` done sans serious error checking
+	sans Object code and ADAR generation
+
+
+
+  F.E.C.E.S. Update 	v0.25.071019
+  
+SLUDhL - spitting out HashLists
+.htaccess finally mastered
+
+
+
+  F.E.C.E.S. Update 	v0.23.071010
+  
+SLUDhL - Update() now handles 'null'
+
+
+
+  F.E.C.E.S. Update 	v0.22.071010
+  
+Store raw text convention -- actively polymorph for view
+Built some tools...
+
+
+
+  Generic Firki Engine  v0.19.071004
+  
+User class now loaded by 'id' rather than by 'name'
+Renaming this think -== Firteen Electronic Content Engine System ==-
+Basic mail system (write, read, inbox, outbox)
+Generate HTML table from ARRAY OBJECT LISTS.
+
+
+
+  Generic Firki Engine  v0.17.071002
+  
+Moved classes to modules folder.
+Renamed templates folder to views.
+Enabled admin permission checking.
+
+
+
+  Generic Firki Engine  v0.13.070927
+  
+Secure user login, session and cookie controls in place.
+
+
+
+  Generic Firki Engine  v0.10.070924
+  
+Model->Control->View engine taking shape.
+  
+  
+  
+  Generic Firki Engine  v0.03.070911
+  
+Started building the user system.  Very basic thought layout....
+
