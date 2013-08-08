@@ -77,6 +77,32 @@ class LOL_INTERFACE_RAMSTACK	{
 		$dump = '<pre>'.htmlspecialchars($dump).'</pre>';
 		return $dump;
 	}
+
+
+	function &Fetch($what,$id) {
+		$error = '';
+		if (!is_numeric($id)) {
+			$error = 'Fetch requires an integer for object `'.$what.'`.';
+		}
+		if ($what=='') {
+			$error = 'Fetch requires a string for `what`.';
+		}
+		if ($error=='') {
+			$stack = LOL_INTERFACE_RAMSTACK::HANDSHAKE();
+			if (isset($stack->ram['wuts'][$what][$id])) {
+				return $stack->ram['wuts'][$what][$id];
+			}
+			else {
+				eval('$stack->ram[\'wuts\'][$what][$id] = '.$what.'::Pop('.$id.');');
+				return $stack->ram['wuts'][$what][$id];
+			}
+		}
+		return LOL::ERROR_OUT($error);
+	}
+				
+
+
+
 }
 
 ?>

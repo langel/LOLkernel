@@ -4,7 +4,7 @@
 define('HOME_DIR', $_SERVER['DOCUMENT_ROOT'].'/');
 define('HOME_URL', 'http://'.$_SERVER['SERVER_NAME'].'/');
 
-require('kernel/head.php');
+require('kernel/_main.php');
 
 LOL::POKE('kernel|api_call',substr($_SERVER['REQUEST_URI'],1));
 

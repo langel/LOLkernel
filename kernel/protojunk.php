@@ -1,6 +1,8 @@
 <?php defined('HOME_DIR') or die('LOLblech');
 
 
+// this file should probably get rolled into other ones.... :X
+
 class LOL_INTERFACE_SYSTUF {
 
 

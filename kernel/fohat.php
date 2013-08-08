@@ -159,7 +159,6 @@ class FOHAT {
     if ($qr) return $this->id;
   }
 
-  /*vibes of confusations; frustrations for celebrations.  change of focus; hocus pocus.  new inventions attract attentions.  never mention the flying locust; it's bogus -- your logic is opinion.  the minions swallow cinnamon.  it's a beginning of of a degrade -- a push in into a new age.  intellect wades and wanes into a cascade.  play the arcade and let your brain jade.--b00daW*/
 /* one man bands ftw  lol  */  //tshirt idea
 }
 
@@ -220,15 +219,6 @@ class uHAT  {
     return mysql_result($qr,0);
   }
 
-  function FetchArray($table,$where='') {
-    $qr = mysql_query("SELECT `$table`.* FROM `$table` $where;");
-    STACK::INC('FOHAT|uFETCH_ARRAY');
-    $results = array();
-    //print "SELECT `$table`.* FROM `$table` $where;";
-    while ($a = @mysql_fetch_assoc($qr))
-      $results[] = $a;
-    return $results;
-  }
 
   function QueryArray($query) {
     // for more complicated queries with JOINS and DISTINCT....
