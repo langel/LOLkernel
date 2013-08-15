@@ -6,8 +6,8 @@
 class LOL_INTERFACE_SYSTUF {
 
 
-	function ScriptFind($what, $suffix) {
-		$script = $what.'/'.$what.$suffix;
+	function ScriptFind($what,$act='',$suffix='.php') {
+		$script = $what.'/'.$what.$act.$suffix;
 		if (is_file('app/'.$script)) {
 			return 'app/'.$script;
 		}

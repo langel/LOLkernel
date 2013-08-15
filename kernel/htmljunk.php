@@ -58,7 +58,7 @@ class LOL_INTERFACE_HTMLJUNK {
 	function HeaderGet() {
 		$template = PEEK('HTMLJUNK|template_header');
 		if ($template!='') {
-			return LOL::Render(PEEK('HTMLJUNK|template_header'));
+			return LOL::Render($template);
 		}
 		else return '';
 	}
@@ -72,7 +72,7 @@ class LOL_INTERFACE_HTMLJUNK {
 	function FooterGet() {
 		$template = PEEK('HTMLJUNK|template_footer');
 		if ($template!='') {
-			return LOL::Render(PEEK('HTMLJUNK|template_footer'));
+			return LOL::Render($template);
 		}
 		else return '';
 	}
@@ -98,7 +98,8 @@ class LOL_INTERFACE_HTMLJUNK {
 			$cmd = urldecode(substr($_SERVER['REQUEST_URI'],1));
 		}
 */
-		poke('command_calls[]',$cmd);
+
+		POKE('render_calls[]',$cmd);
 		$a = explode('/',$cmd);
 		$WUT = $a[0];
 		if ($WUT=='') $WUT = 'index';
@@ -116,7 +117,7 @@ class LOL_INTERFACE_HTMLJUNK {
 		}
 
 		#	Process the controller.
-		$control_file = LOL::ScriptFind($WUT,'.php');
+		$control_file = LOL::ScriptFind($WUT);
 		if ($control_file) {
 			include($control_file);
 		}
@@ -128,13 +129,13 @@ class LOL_INTERFACE_HTMLJUNK {
 		}
 
 		#	Process the template.
-		$template_file = LOL::ScriptFind($WUT,$ACT.'.php');
-		if ($template_file==''&&$output=='') {
+		$template_file = LOL::ScriptFind($WUT,$ACT);
+		if ($template_file==FALSE&&$output=='') {
 			// XXX want this to have an error type too
 			// this would be a minor rendering or template control issue
 			//throw new Exception('Unfound template file -- '.$template);
 			//return false;
-			$errors[] = 'No $output and/or Unfound template file -- '.$template;
+			$errors[] = 'No $output and/or Unfound template file -- '.$WUT.$ACT;
 		}
 		elseif ($output!='') {
 			$render = $output.$render;
@@ -154,7 +155,7 @@ class LOL_INTERFACE_HTMLJUNK {
 		LOL::DEC('RenderRecursionDepth');
 		
 		#	Process errors.
-		if (count($errors)>=2) {
+		if (count($errors)>0) {
 			$four_oh_four = LOL::PEEK('kernel|404');
 			if ($four_oh_four!='') {
 				return LOL::Render($four_oh_four);

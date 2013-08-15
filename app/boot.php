@@ -5,5 +5,6 @@
 
 */
 
+LOL::HeaderSet('index/header');
 
 ?>

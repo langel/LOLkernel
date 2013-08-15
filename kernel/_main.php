@@ -57,7 +57,7 @@ class LOL	{
 
 	# SYSTUF
 
-	function ScriptFind($what, $suffix) { return LOL_INTERFACE_SYSTUF::ScriptFind($what, $suffix); }
+	function ScriptFind($what, $act='', $suffix='.php') { return LOL_INTERFACE_SYSTUF::ScriptFind($what, $act, $suffix); }
 
 
 	# ERROR HAND

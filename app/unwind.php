@@ -1,9 +1,0 @@
-<?php
-/*
-
-	Unwind your app!
-
-*/
-
-
-?>

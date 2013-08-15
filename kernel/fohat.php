@@ -12,39 +12,35 @@
 
 
 function __autoload($wut) {
-	FOHAT::AUTOLOAD($wut);
+	$model_file = $wut.'/'.$wut.'_class.php';
+
+	if (is_file('app/'.$model_file)) {
+		require_once('app/'.$model_file);
+	}
+	elseif (is_file('kernel/app'.$model_file)) {
+		require_once('kernel/app'.$model_file);
+	}
+	else {
+	// XXX	should we check if there is an existing table first?
+	//		could keep table schema in disk directory
+		eval("class {$wut} extends FOHAT {
+			function __construct() {
+				\$this->table_name = '{$wut}';
+			}
+
+			function Pop(\$id) {
+				\$a = new {$wut};
+				\$a->Load(\$id);
+				return \$a;
+			}
+		}");
+	}
 }
+
 
 
 class FOHAT {
 
-	function AUTOLOAD($wut) {
-
-		$model_file = $wut.'/'.$wut.'_class.php';
-
-		if (is_file('app/'.$model_file)) {
-			require_once('app/'.$model_file);
-		}
-		elseif (is_file('kernel/app'.$model_file)) {
-			require_once('kernel/app'.$model_file);
-		}
-		else {
-		// XXX	should we check if there is an existing table first?
-		//		could keep table schema in disk directory
-			eval("class {$wut} extends FOHAT {
-				function __construct() {
-				  \$this->table_name = '{$wut}';
-				}
-
-				function Pop(\$id) {
-				  \$a = new {$wut};
-				  \$a->Load(\$id);
-				  return \$a;
-				}
-			}");
-		}
-	}
-	
 
   function Insert() {
     // used when `id` is manually set before first Save()
@@ -338,9 +334,11 @@ Fohat becomes the several vehicles in tune with the individual for another aspec
 
 class SQLHAT  {
   ## For use in SysOp WHAT only!!  =0
+	// XXX this whole class should prolly be refactored to death
 
   function Query($query)  {
     ## mysql_query only handles single queries
+		// XXX not sure if LOLkernel will need this
     $q = explode(';',$query);
     foreach ($q as $query)
       mysql_query($query);
@@ -349,12 +347,16 @@ class SQLHAT  {
   }
 
   function TableExists($table)  {
+		// XXX this method could prolly live somewhere else
     $a = mysql_query("ANALYZE TABLE `$table`;");
     STACK::INC('FOHAT|sTABLE_EXISTS');
     $a = mysql_fetch_assoc($a);
-    if ($a['Msg_type']=='status')
+    if ($a['Msg_type']=='status') {
       return TRUE;
-    if ($a['Msg_type']=='error')
+		}
+    elseif ($a['Msg_type']=='error') {
       return FALSE;
+		}
+		return FALSE;
   }
 }

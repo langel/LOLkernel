@@ -18,4 +18,6 @@ require('kernel/app/done.php');
 
 echo LOL::PEEK('PAGE_BUILD');
 
+#echo LOL::RamDump();
+
 ?>
