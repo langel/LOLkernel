@@ -29,6 +29,20 @@ class LOL_INTERFACE_HTMLJUNK {
 	}
 
 
+	function Attributes($attr) {
+		if (is_array($attr)) {
+			$new_attr = array();
+			foreach ($attr as $name => $value) {
+				$new_attr[] = $name.' = "'.$value.'"';
+			}
+			return implode(' ',$new_attr);
+		}
+		else {
+			return $attr;
+		}
+	}
+
+
 	function Hook($hook) {
 		$info = PEEK('HTMLJUNK|'.$hook);
 		if (count($info['js_attach'])) foreach ($info['js_attach'] as $js) {
@@ -137,9 +151,6 @@ class LOL_INTERFACE_HTMLJUNK {
 			//return false;
 			$errors[] = 'No $output and/or Unfound template file -- '.$WUT.$ACT;
 		}
-		elseif ($output!='') {
-			$render = $output.$render;
-		}
 		elseif ($template_file) {
 			$str = file_get_contents($template_file);
 			$str = str_replace('<o ','<?php echo $obj->',$str);
@@ -149,6 +160,9 @@ class LOL_INTERFACE_HTMLJUNK {
 			eval(' ?>'.$str.'<?php ');
 			$render = ob_get_contents();
 			ob_end_clean();
+		}
+		elseif ($output!='') {
+			$render = $output.$render;
 		}
 		
 		#	...keeping track of the render depth  :D/

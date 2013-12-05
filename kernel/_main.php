@@ -11,6 +11,7 @@ require('kernel/ramstack.php');
 require('kernel/fohat.php');
 require('kernel/errorhand.php');
 require('kernel/htmljunk.php');
+require('kernel/formbuff.php');
 
 
 ## teh LOL INTERFACE 
@@ -20,6 +21,8 @@ class LOL	{
 
 	#	HTMLJUNK
 
+	function Attributes($array) { return LOL_INTERFACE_HTMLJUNK::Attributes($array); }
+	function Run($cmd) { return LOL_INTERFACE_HTMLJUNK::Render($cmd); }
 	function Render($cmd) { return LOL_INTERFACE_HTMLJUNK::Render($cmd); }
 	function HeaderSet($template) { return LOL_INTERFACE_HTMLJUNK::HeaderSet($template); }
 	function HeaderGet() { return LOL_INTERFACE_HTMLJUNK::HeaderGet(); }
@@ -30,6 +33,10 @@ class LOL	{
 	function JS_attach($file,$hook='header') { return LOL_INTERFACE_HTMLJUNK::JS_attach($file,$hook); }
 	function CSS_attach($file,$hook='header') { return LOL_INTERFACE_HTMLJUNK::CSS_attach($file,$hook); }
 
+
+	# FORMBUFF
+
+	function Form($data) { return new LOL_FORMBUFF($data); }
 
 	#	RAMSTACK UTILITIES
 
@@ -42,7 +49,7 @@ class LOL	{
 
 	# RAMSTACK OBJECT I/O
 
-	function &Fetch($what,$id) { return LOL_INTERFACE_RAMSTACK::Load($what,$id); }
+	function &Fetch($what,$id) { return LOL_INTERFACE_RAMSTACK::Fetch($what,$id); }
 
 	function &Find($what,$where) { return LOL_INTERFACE_REMSTACK::Find($what,$where); }
 

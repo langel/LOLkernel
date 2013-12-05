@@ -102,18 +102,23 @@ class FOHAT {
   function Load($id)  {
     // check for method by $id type
     if (is_array($id)) {
-      foreach ($id as $key => $val)
+      foreach ($id as $key => $val) {
+				$json = json_decode($val);
+				if (is_object($json)) $val = $json;
         $this->$key = $val;
+			}
       return $this->id;
     }
-		print_r($id);
     $qr = mysql_query("SELECT `$this->table_name`.* FROM `$this->table_name` WHERE id = '$id' LIMIT 1;");
     LOL::INC('FOHAT|LOAD');
     // assoc the fields to vars
     if (@mysql_num_rows($qr)) {
       $m = mysql_fetch_assoc($qr);
-      foreach ($m as $key => $val)
+      foreach ($m as $key => $val) {
+				$json = json_decode($val);
+				if (is_object($json)) $val = $json;
         $this->$key = $val;
+			}
       return $this->id;
     }
     return FALSE;
@@ -146,7 +151,6 @@ class FOHAT {
     if ($qr) return $this->id;
   }
 
-/* one man bands ftw  lol  */  //tshirt idea
 }
 
 

@@ -35,7 +35,7 @@ class LOL_FORMBUFF {
 		}
 		else {
 			// XXX error out / field not data found
-			echo 'No field data.';
+			echo 'No field data in '.$name.'.';
 		}
 	}
 
